@@ -2,7 +2,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/screens/auth/login_screen.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,7 +82,9 @@ Future<dynamic> VerifyEmailModalBottomSheetWidget(BuildContext context) {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(LoginScreen.route());
+                    Navigator.pop(context);
+
+                    Navigator.pop(context);
                   },
                 ),
               ),

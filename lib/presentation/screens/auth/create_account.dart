@@ -41,18 +41,16 @@ class CreateAccountScreen extends StatelessWidget {
                 SizedBox(height: 27.h),
                 SizedBox(
                   width: 343.w,
-                  height: 50.h,
                   child: TextFieldMainWidget(
                     image: StaticImages.iIconPerson,
-                    labelText: 'William Black',
                     controller: TextEditingController(),
-                    rootText: 'Full Name',
+                    labelText: 'Full Name',
                   ),
                 ),
                 SizedBox(height: 20.h),
                 SizedBox(
                   width: 343.w,
-                  height: 50.h,
+                  height: 51.h,
                   child: TextFieldWithoutWidget(
                     image: StaticImages.iIconPhone,
                     labelText: 'Phone',
@@ -63,7 +61,6 @@ class CreateAccountScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
                 SizedBox(
                   width: 343.w,
-                  height: 50.h,
                   child: TextFieldWithoutWidget(
                     image: StaticImages.iIconEmailDark,
                     labelText: 'Email',
@@ -74,7 +71,6 @@ class CreateAccountScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
                 SizedBox(
                   width: 343.w,
-                  height: 50.h,
                   child: TextFieldSecondWidget(
                     labelText: 'Password (Atleast 6 characters)',
                     imagePreffix: StaticImages.iIconLocker,
@@ -86,7 +82,6 @@ class CreateAccountScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
                 SizedBox(
                   width: 343.w,
-                  height: 50.h,
                   child: TextFieldSecondWidget(
                     labelText: 'Confirm Password',
                     imagePreffix: StaticImages.iIconLocker,
@@ -120,15 +115,15 @@ class CreateAccountScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account?',
+                      'Already have an account? ',
                       style: GoogleFonts.openSans(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 14.sp,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         Navigator.of(context).push(LoginScreen.route());
                       },
                       child: Text(
@@ -137,11 +132,6 @@ class CreateAccountScreen extends StatelessWidget {
                           color: const Color(0xffD87070),
                           fontWeight: FontWeight.w800,
                         ),
-                      ),
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        splashFactory: NoSplash.splashFactory,
-                        elevation: 0,
                       ),
                     ),
                   ],

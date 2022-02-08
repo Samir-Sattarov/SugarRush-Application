@@ -15,7 +15,7 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Container(
-        height: 500.h,
+        height: MediaQuery.of(context).size.height - 200,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -70,14 +70,17 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
             SizedBox(height: 40.h),
             Center(
               child: Center(
-                child: VerificationCodeInput(
-                  itemDecoration: BoxDecoration(
-                    color: const Color(0xffE4E4E4),
-                    borderRadius: BorderRadius.circular(5),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: VerificationCodeInput(
+                    itemDecoration: BoxDecoration(
+                      color: const Color(0xffE4E4E4),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    keyboardType: TextInputType.number,
+                    length: 4,
+                    onCompleted: (String value) {},
                   ),
-                  keyboardType: TextInputType.number,
-                  length: 4,
-                  onCompleted: (String value) {},
                 ),
               ),
             ),

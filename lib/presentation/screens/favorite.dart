@@ -9,6 +9,10 @@ class FavoriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {},
+          child: const Icon(Icons.chevron_left),
+        ),
         title: const Text('FavoriteScreen'),
       ),
       body: const Center(

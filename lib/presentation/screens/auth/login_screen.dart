@@ -49,10 +49,9 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: 346.w,
                 child: TextFieldMainWidget(
-                  labelText: 'williamblack@gmail.com',
                   image: StaticImages.iIconEmail,
                   controller: _login,
-                  rootText: 'Email',
+                  labelText: 'Email',
                 ),
               ),
               SizedBox(height: 41.h),
@@ -123,14 +122,14 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don’t have an account?',
+                    'Don’t have an account? ',
                     style: GoogleFonts.openSans(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 14.sp),
                   ),
-                  TextButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       Navigator.push(context, CreateAccountScreen.route());
                     },
                     child: Text(
@@ -139,11 +138,6 @@ class LoginScreen extends StatelessWidget {
                         color: const Color(0xffD87070),
                         fontWeight: FontWeight.w800,
                       ),
-                    ),
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      splashFactory: NoSplash.splashFactory,
-                      elevation: 0,
                     ),
                   ),
                 ],

@@ -52,10 +52,11 @@ Future<dynamic> PasswordUpdatedModalBottomSheetWidget(BuildContext context) {
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(
-                    width: 46,
-                    height: 46,
-                    child: Image(
+                  SizedBox(width: 8.w),
+                  SizedBox(
+                    width: 46.w,
+                    height: 46.h,
+                    child: const Image(
                       image: AssetImage(StaticImages.iCheked),
                     ),
                   ),

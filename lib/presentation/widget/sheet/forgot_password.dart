@@ -15,7 +15,7 @@ Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Container(
-        height: 400.h,
+        height: MediaQuery.of(context).size.height - 200,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextFieldWithoutWidget extends StatelessWidget {
@@ -19,29 +20,40 @@ class TextFieldWithoutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textAlign: TextAlign.start,
       cursorColor: const Color(0xffD87070),
       style: const TextStyle(color: Colors.white),
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
-          borderSide:
-              const BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
+          borderSide: BorderSide.none,
+        ),
+        border: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(6),
         ),
         prefixIcon: Image(
           image: AssetImage(image),
         ),
-        enabled: true,
-        labelStyle: GoogleFonts.openSans(
-          color: const Color(0xff666666),
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-        labelText: labelText,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
+        label: Column(children: [
+          SizedBox(height: 30.h),
+          Text(
+            labelText,
+            style: GoogleFonts.openSans(
+              color: const Color(0xff666666),
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+          SizedBox(height: 6.h),
+        ]),
+        alignLabelWithHint: true,
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
         filled: true,
         fillColor: color,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),

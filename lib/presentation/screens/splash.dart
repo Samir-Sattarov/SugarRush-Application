@@ -82,16 +82,15 @@ class SplashScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account?',
+                      'Already have an account? ',
                       style: GoogleFonts.openSans(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 14.sp),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(context, LoginScreen.route());
-                      },
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.of(context).push(LoginScreen.route()),
                       child: Text(
                         'Login',
                         style: GoogleFonts.openSans(
@@ -99,12 +98,7 @@ class SplashScreen extends StatelessWidget {
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        splashFactory: NoSplash.splashFactory,
-                        elevation: 0,
-                      ),
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(height: 41.h),
