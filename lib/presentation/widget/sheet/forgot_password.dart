@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
-import 'package:flutter_application_1/presentation/widget/textfield_without_suffix.dart';
+import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,11 +72,12 @@ Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
             Center(
               child: SizedBox(
                 width: 343.w,
-                child: TextFieldWithoutWidget(
+                child: TextFormFieldWidget(
                   color: const Color(0xffE4E4E4),
-                  image: StaticImages.iIconEmail,
+                  imagePreffix: StaticImages.iIconEmail,
                   labelText: 'Email',
                   controller: TextEditingController(),
+                  validator: (String? value) {},
                 ),
               ),
             ),

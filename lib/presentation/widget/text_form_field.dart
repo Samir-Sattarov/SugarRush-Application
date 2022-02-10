@@ -2,36 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TextFieldSecondWidget extends StatefulWidget {
+class TextFormFieldWidget extends StatefulWidget {
   final String labelText;
   final String imagePreffix;
-  final String imageSuffix;
   final Color color;
+  final bool isPasswordField;
+  final Color textColor;
+  final TextInputType inputType;
+  final FormFieldValidator<String> validator;
   final TextEditingController controller;
 
-  const TextFieldSecondWidget({
+  const TextFormFieldWidget({
     Key? key,
     required this.labelText,
     required this.imagePreffix,
-    required this.imageSuffix,
     required this.controller,
     required this.color,
+    required this.validator,
+    this.isPasswordField = false,
+    this.inputType = TextInputType.text,
+    this.textColor = Colors.white,
   }) : super(key: key);
 
   @override
-  State<TextFieldSecondWidget> createState() => _TextFieldSecondWidgetState();
+  State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
 }
 
-class _TextFieldSecondWidgetState extends State<TextFieldSecondWidget> {
-  bool isBool = true;
+class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
+  bool _showPassword = false;
+
+  get _enableSuffix => !widget.isPasswordField
+      ? null
+      : IconButton(
+          color: const Color(0xff666666),
+          icon: Icon(_showPassword
+              ? Icons.visibility_outlined
+              : Icons.visibility_off_outlined),
+          onPressed: () {
+            setState(() {
+              _showPassword = !_showPassword;
+            });
+          },
+        );
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: widget.validator,
       cursorColor: const Color(0xffD87070),
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(color: widget.textColor),
       controller: widget.controller,
-      obscureText: isBool,
-      keyboardType: TextInputType.text,
+      obscureText: _showPassword,
+      keyboardType: widget.inputType,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
@@ -45,17 +67,7 @@ class _TextFieldSecondWidgetState extends State<TextFieldSecondWidget> {
         prefixIcon: Image(
           image: AssetImage(widget.imagePreffix),
         ),
-        suffixIcon: IconButton(
-          color: const Color(0xff666666),
-          icon: Icon(isBool
-              ? Icons.visibility_outlined
-              : Icons.visibility_off_outlined),
-          onPressed: () {
-            setState(() {
-              isBool = !isBool;
-            });
-          },
-        ),
+        suffixIcon: _enableSuffix,
         label: Column(children: [
           SizedBox(height: 30.h),
           Text(
