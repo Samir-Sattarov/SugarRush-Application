@@ -57,7 +57,7 @@ class CandiesScreen extends StatelessWidget {
                   primary: false,
                   padding: const EdgeInsets.all(20),
                   crossAxisSpacing: 0,
-                  mainAxisSpacing: 100,
+                  mainAxisSpacing: 50,
                   crossAxisCount: 3,
                   children: itemsBuyCards
                       .map((data) => BuyCards(data: data))

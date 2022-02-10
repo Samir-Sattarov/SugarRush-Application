@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TextFieldSecondWidget extends StatelessWidget {
+class TextFieldSecondWidget extends StatefulWidget {
   final String labelText;
   final String imagePreffix;
   final String imageSuffix;
@@ -19,12 +19,18 @@ class TextFieldSecondWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<TextFieldSecondWidget> createState() => _TextFieldSecondWidgetState();
+}
+
+class _TextFieldSecondWidgetState extends State<TextFieldSecondWidget> {
+  bool isBool = true;
+  @override
   Widget build(BuildContext context) {
     return TextField(
       cursorColor: const Color(0xffD87070),
       style: const TextStyle(color: Colors.white),
-      controller: controller,
-      obscureText: true,
+      controller: widget.controller,
+      obscureText: isBool,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
@@ -37,18 +43,23 @@ class TextFieldSecondWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         prefixIcon: Image(
-          image: AssetImage(imagePreffix),
+          image: AssetImage(widget.imagePreffix),
         ),
         suffixIcon: IconButton(
-          icon: Image(
-            image: AssetImage(imageSuffix),
-          ),
-          onPressed: () {},
+          color: const Color(0xff666666),
+          icon: Icon(isBool
+              ? Icons.visibility_outlined
+              : Icons.visibility_off_outlined),
+          onPressed: () {
+            setState(() {
+              isBool = !isBool;
+            });
+          },
         ),
         label: Column(children: [
           SizedBox(height: 30.h),
           Text(
-            labelText,
+            widget.labelText,
             style: GoogleFonts.openSans(
               color: const Color(0xff666666),
               fontWeight: FontWeight.w600,
@@ -61,7 +72,7 @@ class TextFieldSecondWidget extends StatelessWidget {
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         filled: true,
-        fillColor: color,
+        fillColor: widget.color,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),

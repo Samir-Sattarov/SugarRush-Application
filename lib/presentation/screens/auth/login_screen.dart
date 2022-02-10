@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/auth/create_account.dart';
+import 'package:flutter_application_1/presentation/utils/data_classes.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/forgot_password.dart';
@@ -12,16 +13,37 @@ import 'package:flutter_application_1/presentation/widget/title.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   static route() =>
       MaterialPageRoute(builder: (context) => const LoginScreen());
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    final _login = TextEditingController();
-    final _password = TextEditingController();
+    final _loginTextController = TextEditingController();
+    final _passwordTextController = TextEditingController();
+    String? errorText;
+
+    void auth() {
+      final _login = _loginTextController.text;
+      final _password = _loginTextController.text;
+      if (_login == 'admin' && _password == 'admin') {
+        errorText = null;
+        VerificationCodeModalBottomSheetWidget(context);
+      } else {
+        errorText = 'Не верный логин или пароль';
+        print(errorText);
+      }
+    }
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -49,9 +71,10 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: 346.w,
                 child: TextFieldMainWidget(
-                  image: StaticImages.iIconEmail,
-                  controller: _login,
+                  image: StaticImages.iIconEmailDark,
+                  controller: _loginTextController,
                   labelText: 'Email',
+                  validator: FormValidator.validateEmail,
                 ),
               ),
               SizedBox(height: 41.h),
@@ -61,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                   imagePreffix: StaticImages.iIconLocker,
                   imageSuffix: StaticImages.iIconEye,
                   labelText: 'Password',
-                  controller: _password,
+                  controller: _passwordTextController,
                   color: const Color(0xff2E2E2E),
                 ),
               ),
@@ -101,21 +124,18 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 87),
                 child: ButtonWidget(
-                  height: 51.h,
-                  background: const Color(0xffFF748C),
-                  textColor: Colors.white,
-                  text: Text(
-                    'Login',
-                    style: GoogleFonts.openSans(
-                      color: Colors.white,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
+                    height: 51.h,
+                    background: const Color(0xffFF748C),
+                    textColor: Colors.white,
+                    text: Text(
+                      'Login',
+                      style: GoogleFonts.openSans(
+                        color: Colors.white,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    VerificationCodeModalBottomSheetWidget(context);
-                  },
-                ),
+                    onPressed: auth),
               ),
               SizedBox(height: 30.h),
               Row(
@@ -156,21 +176,27 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      launch('https://www.google.com/');
+                    },
                     child: const Image(
                       image: AssetImage(StaticImages.iIconGoogle),
                     ),
                   ),
                   SizedBox(width: 37.w),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      launch('https://www.facebook.com/');
+                    },
                     child: const Image(
                       image: AssetImage(StaticImages.iIconFacebook),
                     ),
                   ),
                   SizedBox(width: 37.w),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      launch('https://www.twitter.com/');
+                    },
                     child: const Image(
                       image: AssetImage(StaticImages.iIconTwitter),
                     ),

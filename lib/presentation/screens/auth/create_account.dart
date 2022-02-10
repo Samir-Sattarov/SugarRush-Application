@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/auth/login_screen.dart';
+import 'package:flutter_application_1/presentation/utils/data_classes.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/verify_your_email.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_1/presentation/widget/textfield_without_suff
 import 'package:flutter_application_1/presentation/widget/title.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   static route() =>
@@ -45,6 +47,7 @@ class CreateAccountScreen extends StatelessWidget {
                     image: StaticImages.iIconPerson,
                     controller: TextEditingController(),
                     labelText: 'Full Name',
+                    validator: FormValidator.validateEmail,
                   ),
                 ),
                 SizedBox(height: 20.h),
@@ -149,11 +152,32 @@ class CreateAccountScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Image(image: AssetImage(StaticImages.iIconGoogle)),
+                    GestureDetector(
+                      onTap: () {
+                        launch('https://www.google.com/');
+                      },
+                      child: const Image(
+                        image: AssetImage(StaticImages.iIconGoogle),
+                      ),
+                    ),
                     SizedBox(width: 37.w),
-                    const Image(image: AssetImage(StaticImages.iIconFacebook)),
+                    GestureDetector(
+                      onTap: () {
+                        launch('https://www.facebook.com/');
+                      },
+                      child: const Image(
+                        image: AssetImage(StaticImages.iIconFacebook),
+                      ),
+                    ),
                     SizedBox(width: 37.w),
-                    const Image(image: AssetImage(StaticImages.iIconTwitter)),
+                    GestureDetector(
+                      onTap: () {
+                        launch('https://www.twitter.com/');
+                      },
+                      child: const Image(
+                        image: AssetImage(StaticImages.iIconTwitter),
+                      ),
+                    ),
                   ],
                 )
               ],

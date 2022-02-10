@@ -16,7 +16,7 @@ class BuyCards extends StatelessWidget {
       children: [
         Container(
           width: 92.w,
-          height: 126.h,
+          height: 130.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(

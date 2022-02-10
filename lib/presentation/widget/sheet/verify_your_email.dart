@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 Future<dynamic> VerifyEmailModalBottomSheetWidget(BuildContext context) {
   return showModalBottomSheet(
+    barrierColor: const Color.fromRGBO(255, 255, 255, 0.3),
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     context: context,
