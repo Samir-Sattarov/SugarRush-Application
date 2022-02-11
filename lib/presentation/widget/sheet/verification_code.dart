@@ -10,6 +10,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+String? pincode;
+void confirm(BuildContext context) {
+  print(pincode);
+
+  if (pincode == '1234') {
+    Navigator.of(context).push(MainScreen.route());
+  } else {
+    print('Error');
+  }
+}
+
 Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
   return showModalBottomSheet(
     isScrollControlled: true,
@@ -17,14 +28,6 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       // final pincode = TextEditingController();
-      String? pincode;
-      void confirm() {
-        if (pincode == '1234') {
-          Navigator.of(context).push(MainScreen.route());
-        } else {
-          print('Error');
-        }
-      }
 
       return Container(
         height: MediaQuery.of(context).size.height - 200,
@@ -84,26 +87,21 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Form(
-                    key: _formKey,
-                    autovalidateMode: AutovalidateMode.always,
-                    child: PinPut(
-                      validator: FormValidator.validatorValidationCode,
-                      onSubmit: (value) {
-                        pincode = value;
-                      },
-                      fieldsAlignment: MainAxisAlignment.spaceEvenly,
-                      separator: const SizedBox(width: 30),
-                      submittedFieldDecoration:
-                          const BoxDecoration(color: Color(0xffE4E4E4)),
-                      selectedFieldDecoration:
-                          const BoxDecoration(color: Color(0xffE4E4E4)),
-                      followingFieldDecoration:
-                          const BoxDecoration(color: Color(0xffE4E4E4)),
-                      cursorColor: Colors.black,
-                      animationCurve: Curves.easeOutCubic,
-                      fieldsCount: 4,
-                    ),
+                  child: PinPut(
+                    onChanged: (value) {
+                      pincode = value;
+                    },
+                    fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                    separator: const SizedBox(width: 30),
+                    submittedFieldDecoration:
+                        const BoxDecoration(color: Color(0xffE4E4E4)),
+                    selectedFieldDecoration:
+                        const BoxDecoration(color: Color(0xffE4E4E4)),
+                    followingFieldDecoration:
+                        const BoxDecoration(color: Color(0xffE4E4E4)),
+                    cursorColor: Colors.black,
+                    animationCurve: Curves.easeOutCubic,
+                    fieldsCount: 4,
                   ),
                 ),
               ),
@@ -124,7 +122,7 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onPressed: confirm,
+                  onPressed: () => confirm(context),
                 ),
               ),
             ),

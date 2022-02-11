@@ -143,10 +143,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 3),
+              SizedBox(height: 3.h),
               Center(
                 child: SizedBox(
-                  width: 321,
+                  width: 321.w,
                   height: 148.h,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -156,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               Container(
                 padding: EdgeInsets.only(left: 30.w),
                 child: Column(
@@ -200,7 +200,7 @@ class Popup extends StatelessWidget {
                 style: GoogleFonts.openSans(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                 ),
               ),
             ],

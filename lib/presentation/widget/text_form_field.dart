@@ -29,7 +29,7 @@ class TextFormFieldWidget extends StatefulWidget {
 }
 
 class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
-  bool _hidePassword = true;
+  bool _hidePassword = false;
 
   get _enableSuffix => !widget.isPasswordField
       ? null
