@@ -7,6 +7,7 @@ class FormButtonWidget extends StatefulWidget {
   final Color background;
   final Color textColor;
   final Widget text;
+  final bool mainButton;
   final Function() onPressed;
   const FormButtonWidget({
     Key? key,
@@ -18,6 +19,7 @@ class FormButtonWidget extends StatefulWidget {
     required this.textColor,
     required this.onPressed,
     this.onSuccess,
+    this.mainButton = false,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
@@ -39,6 +41,8 @@ class _FormButtonWidgetState extends State<FormButtonWidget> {
   get height => widget.height;
 
   get text => widget.text;
+
+  get mainButton => widget.mainButton;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +71,7 @@ class _FormButtonWidgetState extends State<FormButtonWidget> {
       loading = true;
     });
 
-    if (widget.formKey.currentState!.validate()) {
-      await Future.delayed(const Duration(seconds: 2));
+    if (widget.formKey.currentState!.validate() && mainButton == true) {
       VerificationCodeModalBottomSheetWidget(context);
     }
 

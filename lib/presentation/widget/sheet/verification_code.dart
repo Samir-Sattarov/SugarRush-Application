@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
   return showModalBottomSheet(
     isScrollControlled: true,
@@ -83,22 +84,26 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: PinPut(
-                    validator: FormValidator.validatorValidationCode,
-                    onSubmit: (value) {
-                      pincode = value;
-                    },
-                    fieldsAlignment: MainAxisAlignment.spaceEvenly,
-                    separator: const SizedBox(width: 30),
-                    submittedFieldDecoration:
-                        const BoxDecoration(color: Color(0xffE4E4E4)),
-                    selectedFieldDecoration:
-                        const BoxDecoration(color: Color(0xffE4E4E4)),
-                    followingFieldDecoration:
-                        const BoxDecoration(color: Color(0xffE4E4E4)),
-                    cursorColor: Colors.black,
-                    animationCurve: Curves.easeOutCubic,
-                    fieldsCount: 4,
+                  child: Form(
+                    key: _formKey,
+                    autovalidateMode: AutovalidateMode.always,
+                    child: PinPut(
+                      validator: FormValidator.validatorValidationCode,
+                      onSubmit: (value) {
+                        pincode = value;
+                      },
+                      fieldsAlignment: MainAxisAlignment.spaceEvenly,
+                      separator: const SizedBox(width: 30),
+                      submittedFieldDecoration:
+                          const BoxDecoration(color: Color(0xffE4E4E4)),
+                      selectedFieldDecoration:
+                          const BoxDecoration(color: Color(0xffE4E4E4)),
+                      followingFieldDecoration:
+                          const BoxDecoration(color: Color(0xffE4E4E4)),
+                      cursorColor: Colors.black,
+                      animationCurve: Curves.easeOutCubic,
+                      fieldsCount: 4,
+                    ),
                   ),
                 ),
               ),

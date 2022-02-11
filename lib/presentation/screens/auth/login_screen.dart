@@ -32,12 +32,11 @@ class LoginScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: const Color(0xff383838),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: const Color(0xff383838),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 75.h),
@@ -120,6 +119,7 @@ class LoginScreen extends StatelessWidget {
                     background: const Color(0xffFF748C),
                     formKey: _formKey,
                     height: 51,
+                    mainButton: true,
                     text: Text(
                       'Login',
                       style: GoogleFonts.openSans(

@@ -4,12 +4,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
-import 'package:flutter_application_1/presentation/widget/button.dart';
+import 'package:flutter_application_1/presentation/widget/button_form.dart';
 import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   return showModalBottomSheet(
     barrierColor: const Color.fromRGBO(255, 255, 255, 0.3),
     isScrollControlled: true,
@@ -73,12 +75,18 @@ Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
             Center(
               child: SizedBox(
                 width: 343.w,
-                child: TextFormFieldWidget(
-                  color: const Color(0xffE4E4E4),
-                  imagePreffix: StaticImages.iIconEmail,
-                  labelText: 'Email',
-                  controller: TextEditingController(),
-                  validator: FormValidator.validateEmail,
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: TextFormFieldWidget(
+                    textColor: Colors.black,
+                    inputType: TextInputType.emailAddress,
+                    color: const Color(0xffE4E4E4),
+                    imagePreffix: StaticImages.iIconEmail,
+                    labelText: 'Email',
+                    controller: TextEditingController(),
+                    validator: FormValidator.validateEmail,
+                  ),
                 ),
               ),
             ),
@@ -86,19 +94,27 @@ Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 88),
               child: Center(
-                child: ButtonWidget(
-                  height: 51.h,
-                  background: const Color(0xffff748c),
-                  textColor: Colors.white,
+                child: FormButtonWidget(
+                  formKey: _formKey,
                   text: Text(
                     'Continue',
                     style: GoogleFonts.openSans(
                       color: Colors.white,
-                      fontSize: 18.sp,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onPressed: () {},
+                  weight: double.infinity,
+                  height: 51,
+                  background: const Color(0xFFFF748C),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('OK ;)'),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

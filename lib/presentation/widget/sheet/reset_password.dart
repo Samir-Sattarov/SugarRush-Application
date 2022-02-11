@@ -2,12 +2,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
-import 'package:flutter_application_1/presentation/widget/button.dart';
+import 'package:flutter_application_1/presentation/widget/button_form.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/password_updated.dart';
+import 'package:flutter_application_1/presentation/widget/sheet/verification_code.dart';
 import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final TextEditingController contollerOne = TextEditingController();
+final TextEditingController contollerTwo = TextEditingController();
 
 Future<dynamic> ResetPasswordModalBottomSheetWidget(BuildContext context) {
   return showModalBottomSheet(
@@ -70,29 +76,58 @@ Future<dynamic> ResetPasswordModalBottomSheetWidget(BuildContext context) {
               ),
             ),
             SizedBox(height: 40.h),
-            Center(
-              child: SizedBox(width: 343.w, child: FormWidget()),
+            Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17),
+                child: Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        TextFormFieldWidget(
+                          textColor: Colors.black,
+                          labelText: 'Password (Atleast 6 characters)',
+                          imagePreffix: StaticImages.iIconLocker,
+                          controller: contollerOne,
+                          color: const Color(0xffE4E4E4),
+                          validator: FormValidator.validatorPassword,
+                        ),
+                        SizedBox(height: 20.h),
+                        TextFormFieldWidget(
+                          textColor: Colors.black,
+                          labelText: 'Confirm Password',
+                          imagePreffix: StaticImages.iIconLocker,
+                          controller: contollerTwo,
+                          color: const Color(0xffE4E4E4),
+                          validator: FormValidator.validatorPassword,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 41.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 88),
               child: Center(
-                child: ButtonWidget(
+                child: FormButtonWidget(
+                  formKey: _formKey,
+                  weight: double.infinity,
                   height: 51.h,
                   background: const Color(0xffff748c),
                   textColor: Colors.white,
                   text: Text(
-                    'Confirm Password',
+                    'Continue',
                     style: GoogleFonts.openSans(
                       color: Colors.white,
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    PasswordUpdatedModalBottomSheetWidget(context);
-                  },
+                  onPressed: () {},
                 ),
               ),
             ),
@@ -101,47 +136,4 @@ Future<dynamic> ResetPasswordModalBottomSheetWidget(BuildContext context) {
       );
     },
   );
-}
-
-class FormWidget extends StatelessWidget {
-  FormWidget({Key? key}) : super(key: key);
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.always,
-      child: Column(
-        children: [
-          TextFormFieldWidget(
-            labelText: 'Password (Atleast 6 characters)',
-            imagePreffix: StaticImages.iIconLocker,
-            controller: TextEditingController(),
-            color: const Color(0xffE4E4E4),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: 20.h),
-          TextFormFieldWidget(
-            labelText: 'Confirm Password',
-            imagePreffix: StaticImages.iIconLocker,
-            controller: TextEditingController(),
-            color: const Color(0xffE4E4E4),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }

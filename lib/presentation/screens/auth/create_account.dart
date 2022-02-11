@@ -33,6 +33,7 @@ class CreateAccountScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         color: const Color(0xff383838),
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(height: 100.h),
@@ -47,69 +48,53 @@ class CreateAccountScreen extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 343.w,
-                      child: TextFormFieldWidget(
+                      child: const TextFormFieldWidget(
                         imagePreffix: StaticImages.iIconPerson,
-                        controller: TextEditingController(),
                         labelText: 'Full Name',
-                        color: const Color(0xff2E2E2E),
+                        color: Color(0xff2E2E2E),
                         validator: FormValidator.validatorName,
                       ),
                     ),
                     SizedBox(height: 20.h),
                     SizedBox(
                       width: 343.w,
-                      height: 55.h,
-                      child: TextFormFieldWidget(
+                      child: const TextFormFieldWidget(
                         imagePreffix: StaticImages.iIconPhone,
                         labelText: 'Phone',
-                        color: const Color(0xff2E2E2E),
-                        controller: TextEditingController(),
-                        validator: FormValidator.validatorPhone,
+                        color: Color(0xff2E2E2E),
+                        validator: FormValidator.empty,
                       ),
                     ),
                     SizedBox(height: 20.h),
                     SizedBox(
                       width: 343.w,
-                      child: TextFormFieldWidget(
+                      child: const TextFormFieldWidget(
                         imagePreffix: StaticImages.iIconEmailDark,
                         labelText: 'Email',
-                        color: const Color(0xff2E2E2E),
-                        controller: TextEditingController(),
+                        color: Color(0xff2E2E2E),
                         validator: FormValidator.validateEmail,
                       ),
                     ),
                     SizedBox(height: 20.h),
                     SizedBox(
                       width: 343.w,
-                      child: TextFormFieldWidget(
+                      child: const TextFormFieldWidget(
                         labelText: 'Password (Atleast 6 characters)',
                         imagePreffix: StaticImages.iIconLocker,
-                        controller: TextEditingController(),
-                        color: const Color(0xff2E2E2E),
+                        color: Color(0xff2E2E2E),
                         isPasswordField: true,
-                        validator: (String? value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
+                        validator: FormValidator.validatorPassword,
                       ),
                     ),
                     SizedBox(height: 20.h),
                     SizedBox(
                       width: 343.w,
-                      child: TextFormFieldWidget(
+                      child: const TextFormFieldWidget(
                         labelText: 'Confirm Password',
                         isPasswordField: true,
                         imagePreffix: StaticImages.iIconLocker,
-                        controller: TextEditingController(),
-                        color: const Color(0xff2E2E2E),
-                        validator: (String? value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
+                        color: Color(0xff2E2E2E),
+                        validator: FormValidator.validatorPassword,
                       ),
                     ),
                   ],

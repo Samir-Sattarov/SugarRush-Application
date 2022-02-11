@@ -10,16 +10,16 @@ class TextFormFieldWidget extends StatefulWidget {
   final Color textColor;
   final TextInputType inputType;
   final FormFieldValidator<String> validator;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   const TextFormFieldWidget({
     Key? key,
     required this.labelText,
     required this.imagePreffix,
-    required this.controller,
     required this.color,
     required this.validator,
     this.isPasswordField = false,
+    this.controller,
     this.inputType = TextInputType.text,
     this.textColor = Colors.white,
   }) : super(key: key);
@@ -29,18 +29,18 @@ class TextFormFieldWidget extends StatefulWidget {
 }
 
 class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
-  bool _showPassword = false;
+  bool _hidePassword = true;
 
   get _enableSuffix => !widget.isPasswordField
       ? null
       : IconButton(
           color: const Color(0xff666666),
-          icon: Icon(_showPassword
+          icon: Icon(_hidePassword
               ? Icons.visibility_outlined
               : Icons.visibility_off_outlined),
           onPressed: () {
             setState(() {
-              _showPassword = !_showPassword;
+              _hidePassword = !_hidePassword;
             });
           },
         );
@@ -97,7 +97,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       cursorColor: const Color(0xffD87070),
       style: TextStyle(color: widget.textColor),
       controller: widget.controller,
-      obscureText: _showPassword,
+      obscureText: _hidePassword,
       keyboardType: widget.inputType,
     );
   }

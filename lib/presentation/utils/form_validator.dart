@@ -1,7 +1,7 @@
 class FormValidator {
-  static String? empty(value, String errorMessage) {
+  static String? empty(value) {
     if (value == null || value.isEmpty) {
-      return errorMessage;
+      return 'Please Fill In The Fields';
     }
     return null;
   }
@@ -17,18 +17,15 @@ class FormValidator {
   }
 
   static String? validatorName(value) {
-    bool emailValid = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(value ?? '');
-    if (value == null || value.isEmpty || !emailValid) {
+    if (value == null || value.isEmpty) {
       return 'Please Enter Your Name';
     }
     return null;
   }
 
   static String? validatorPhone(value) {
-    bool emailValid = RegExp(r"^[0-9]+").hasMatch(value ?? '');
-    if (value == null || value.isEmpty || !emailValid) {
+    bool phoneValid = RegExp("[0-9] +").hasMatch(value ?? '');
+    if (value == null || value.isEmpty || !phoneValid) {
       return 'Please Enter Email';
     }
     return null;
