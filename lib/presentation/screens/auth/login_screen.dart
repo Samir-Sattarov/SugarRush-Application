@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/auth/create_account.dart';
 import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
-import 'package:flutter_application_1/presentation/widget/button.dart';
+import 'package:flutter_application_1/presentation/widget/button_form.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/forgot_password.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/reset_password.dart';
-import 'package:flutter_application_1/presentation/widget/sheet/verification_code.dart';
 import 'package:flutter_application_1/presentation/widget/subtitle.dart';
 import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
 import 'package:flutter_application_1/presentation/widget/title.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
@@ -22,18 +22,6 @@ class LoginScreen extends StatelessWidget {
   final _loginTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   String? errorText;
-
-  void auth(BuildContext context) {
-    final _login = _loginTextController.text;
-    final _password = _loginTextController.text;
-    if (_login == 'admin' && _password == 'admin') {
-      errorText = null;
-      VerificationCodeModalBottomSheetWidget(context);
-    } else {
-      errorText = 'Не верный логин или пароль';
-      print(errorText);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +33,7 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -62,6 +51,7 @@ class LoginScreen extends StatelessWidget {
               const SubTitle(text: 'Please sign in to continue'),
               SizedBox(height: 40.h),
               Form(
+                autovalidateMode: AutovalidateMode.always,
                 key: _formKey,
                 child: Column(
                   children: [
@@ -85,12 +75,7 @@ class LoginScreen extends StatelessWidget {
                         controller: _passwordTextController,
                         isPasswordField: true,
                         color: const Color(0xff2E2E2E),
-                        validator: (String? value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
+                        validator: FormValidator.validatorPassword,
                       ),
                     ),
                   ],
@@ -130,21 +115,23 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 37.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 87),
-                child: ButtonWidget(
-                    height: 51.h,
+                  padding: const EdgeInsets.symmetric(horizontal: 87),
+                  child: FormButtonWidget(
                     background: const Color(0xffFF748C),
-                    textColor: Colors.white,
+                    formKey: _formKey,
+                    height: 51,
                     text: Text(
                       'Login',
                       style: GoogleFonts.openSans(
                         color: Colors.white,
-                        fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
+                        fontSize: 18,
                       ),
                     ),
-                    onPressed: () => auth(context)),
-              ),
+                    weight: double.infinity,
+                    textColor: Colors.white,
+                    onPressed: () {},
+                  )),
               SizedBox(height: 30.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -152,9 +139,10 @@ class LoginScreen extends StatelessWidget {
                   Text(
                     'Don’t have an account? ',
                     style: GoogleFonts.openSans(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.sp),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {

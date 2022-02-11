@@ -2,7 +2,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/password_updated.dart';

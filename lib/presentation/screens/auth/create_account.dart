@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/auth/login_screen.dart';
 import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
-import 'package:flutter_application_1/presentation/widget/button.dart';
+import 'package:flutter_application_1/presentation/widget/button_form.dart';
 import 'package:flutter_application_1/presentation/widget/sheet/verify_your_email.dart';
 import 'package:flutter_application_1/presentation/widget/subtitle.dart';
 import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
@@ -52,7 +52,7 @@ class CreateAccountScreen extends StatelessWidget {
                         controller: TextEditingController(),
                         labelText: 'Full Name',
                         color: const Color(0xff2E2E2E),
-                        validator: (String? value) {},
+                        validator: FormValidator.validatorName,
                       ),
                     ),
                     SizedBox(height: 20.h),
@@ -64,7 +64,7 @@ class CreateAccountScreen extends StatelessWidget {
                         labelText: 'Phone',
                         color: const Color(0xff2E2E2E),
                         controller: TextEditingController(),
-                        validator: (String? value) {},
+                        validator: FormValidator.validatorPhone,
                       ),
                     ),
                     SizedBox(height: 20.h),
@@ -118,9 +118,11 @@ class CreateAccountScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 87.w),
-                child: ButtonWidget(
+                child: FormButtonWidget(
                   height: 51.h,
                   background: const Color(0xffFF748C),
+                  formKey: _formKey,
+                  weight: double.infinity,
                   textColor: Colors.white,
                   text: Text(
                     'Sing Up',

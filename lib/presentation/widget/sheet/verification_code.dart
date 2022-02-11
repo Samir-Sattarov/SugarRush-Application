@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/main_screen.dart';
+import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,6 +84,7 @@ Future<dynamic> VerificationCodeModalBottomSheetWidget(BuildContext context) {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: PinPut(
+                    validator: FormValidator.validatorValidationCode,
                     onSubmit: (value) {
                       pincode = value;
                     },

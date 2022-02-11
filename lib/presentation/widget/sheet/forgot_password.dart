@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/utils/form_validator.dart';
 import 'package:flutter_application_1/presentation/utils/images.dart';
 import 'package:flutter_application_1/presentation/widget/button.dart';
 import 'package:flutter_application_1/presentation/widget/text_form_field.dart';
@@ -77,7 +78,7 @@ Future<dynamic> ForgotPasswordModalBottomSheetWidget(BuildContext context) {
                   imagePreffix: StaticImages.iIconEmail,
                   labelText: 'Email',
                   controller: TextEditingController(),
-                  validator: (String? value) {},
+                  validator: FormValidator.validateEmail,
                 ),
               ),
             ),

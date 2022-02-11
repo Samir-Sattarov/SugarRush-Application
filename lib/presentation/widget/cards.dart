@@ -13,6 +13,7 @@ class BuyCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.hardEdge,
       children: [
         Container(
           width: 92.w,
@@ -54,7 +55,7 @@ class BuyCards extends StatelessWidget {
               ),
             ),
             decoration: const BoxDecoration(
-              color: Colors.green,
+              color: Color(0xffFF7474),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
@@ -66,9 +67,12 @@ class BuyCards extends StatelessWidget {
           top: -10,
           left: -12,
           child: IconButton(
+            splashRadius: 0.00001,
+            splashColor: Colors.transparent,
             icon: const Icon(
               Icons.add,
               color: Colors.white,
+              size: 15,
             ),
             onPressed: () {},
           ),
@@ -77,9 +81,12 @@ class BuyCards extends StatelessWidget {
           top: -10,
           right: 12,
           child: IconButton(
+            splashRadius: 0.00001,
+            splashColor: Colors.transparent,
             icon: const Icon(
               Icons.favorite_border_outlined,
               color: Colors.white,
+              size: 15,
             ),
             onPressed: () {},
           ),

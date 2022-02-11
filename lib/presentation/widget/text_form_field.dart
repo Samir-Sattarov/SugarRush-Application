@@ -48,12 +48,6 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: widget.validator,
-      cursorColor: const Color(0xffD87070),
-      style: TextStyle(color: widget.textColor),
-      controller: widget.controller,
-      obscureText: _showPassword,
-      keyboardType: widget.inputType,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
@@ -85,9 +79,26 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         filled: true,
         fillColor: widget.color,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        errorMaxLines: 1,
+        errorStyle: GoogleFonts.openSans(
+          color: const Color.fromARGB(228, 255, 49, 49),
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
       ),
+      validator: widget.validator,
+      cursorColor: const Color(0xffD87070),
+      style: TextStyle(color: widget.textColor),
+      controller: widget.controller,
+      obscureText: _showPassword,
+      keyboardType: widget.inputType,
     );
   }
 }

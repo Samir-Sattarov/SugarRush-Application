@@ -5,9 +5,7 @@ class ButtonWidget extends StatelessWidget {
   final double height;
   final Color background;
   final Color textColor;
-
   final Widget text;
-
   final Function() onPressed;
 
   const ButtonWidget({
